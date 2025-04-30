@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pengumuman Kelulusan SMA YPK Sentani</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    button, input[type="submit"] {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #002244;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .hidden {
+      display: none;
+    }
+    .status {
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+    .lulus {
+      color: green;
+    }
+    .tidak-lulus {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Pengumuman Kelulusan</h1>
+  <h2>SMA YPK Sentani Tahun Ajaran 2024/2025</h2>
+</header>
+
+<div class="container" id="welcome">
+  <p>Selamat dan sukses kepada seluruh peserta didik kelas XII SMA YPK Sentani yang telah menyelesaikan pendidikan. Perjalanan kalian selama ini adalah bukti ketekunan, semangat, dan kerja keras. Semoga ilmu yang telah diperoleh menjadi bekal untuk melanjutkan ke jenjang berikutnya. Kami bangga atas pencapaian kalian. Tuhan memberkati!</p>
+  <button onclick="showLogin()">LOGIN untuk Melihat Hasil Kelulusan</button>
+</div>
+
+<div class="container hidden" id="login-form">
+  <h3>Masukkan NISN Anda</h3>
+  <input type="text" id="nisnInput" placeholder="Contoh: 1234567890" />
+  <br />
+  <input type="submit" value="CEK KELULUSAN" onclick="cekKelulusan()" />
+  <div id="result" class="status"></div>
+</div>
+
+<script>
+  const dataKelulusan = {
+  "0062407541": {
+    "nama": "Alberth Abraham Sokoy",
+    "status": "LULUS"
+  },
+  "0066092418": {
+    "nama": "Belandina Kaigere",
+    "status": "LULUS"
+  },
+  "0079777078": {
+    "nama": "Ceasy Yosua Ayomi",
+    "status": "LULUS"
+  },
+  "0052337322": {
+    "nama": "Chintia Ferawati Bano",
+    "status": "LULUS"
+  },
+  "0064147608": {
+    "nama": "Ferdinan Falen Fernandes Monim",
+    "status": "LULUS"
+  },
+  "0055146459": {
+    "nama": "Fitri Kogoya",
+    "status": "LULUS"
+  },
+  "0076735800": {
+    "nama": "Hans Ricard Waisamon",
+    "status": "LULUS"
+  },
+  "0074218760": {
+    "nama": "Iren Aprilia Suebu",
+    "status": "LULUS"
+  },
+  "0073837016": {
+    "nama": "James Robert Rate",
+    "status": "LULUS"
+  },
+  "0069473788": {
+    "nama": "Kevin Jordan Kespo Wasis",
+    "status": "LULUS"
+  },
+  "3068957310": {
+    "nama": "Konny Suebu",
+    "status": "LULUS"
+  },
+  "0023389779": {
+    "nama": "Kostan Wamili",
+    "status": "LULUS"
+  },
+  "0062490828": {
+    "nama": "Lewi Nerotumilena",
+    "status": "LULUS"
+  },
+  "0069551618": {
+    "nama": "Linet Keren Yoku",
+    "status": "LULUS"
+  },
+  "0072230509": {
+    "nama": "Martha Agustina Bano",
+    "status": "LULUS"
+  },
+  "0071910968": {
+    "nama": "Meylan Paskalin Waipon",
+    "status": "LULUS"
+  },
+  "3081912662": {
+    "nama": "Paschalis Renato Mangge",
+    "status": "LULUS"
+  },
+  "0069117098": {
+    "nama": "Ramayana Suebu",
+    "status": "LULUS"
+  },
+  "0063685234": {
+    "nama": "Rickson Ondikleuw",
+    "status": "LULUS"
+  },
+  "0056804775": {
+    "nama": "Rosalinda Ibo",
+    "status": "LULUS"
+  },
+  "0065566656": {
+    "nama": "Ruben Pallo",
+    "status": "LULUS"
+  },
+  "0055856244": {
+    "nama": "Saiful Fanurmadi",
+    "status": "LULUS"
+  },
+  "0073087556": {
+    "nama": "Valensia Renita Kopeuw",
+    "status": "LULUS"
+  },
+  "0065551718": {
+    "nama": "Yohanis Suebu",
+    "status": "LULUS"
+  }
+};
+
+  function showLogin() {
+    document.getElementById('welcome').classList.add('hidden');
+    document.getElementById('login-form').classList.remove('hidden');
+  }
+
+  function cekKelulusan() {
+    const nisn = document.getElementById('nisnInput').value.trim();
+    const hasil = dataKelulusan[nisn];
+    const resultDiv = document.getElementById('result');
+
+    if (hasil) {
+      resultDiv.innerHTML = `
+        <p>Nama: <strong>${hasil.nama}</strong></p>
+        <p class="${hasil.status === 'LULUS' ? 'lulus' : 'tidak-lulus'}">Status: ${hasil.status}</p>
+        ${hasil.status === 'LULUS' ? 
+          '<p><em>Bagi yang dinyatakan <strong>LULUS</strong>, silakan mengambil Surat Keterangan Lulus di Ruang Tata Usaha dengan berpakaian <strong>Rapi dan Sopan</strong>.</em></p>' 
+          : ''
+        }
+      `;
+    } else {
+      resultDiv.innerHTML = "<p style='color:red;'>NISN tidak ditemukan.</p>";
+    }
+  }
+</script>
+
+</body>
+</html>
